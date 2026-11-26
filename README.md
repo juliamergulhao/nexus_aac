@@ -13,13 +13,21 @@
 </p>
 
 <p>
-  <a href="https://juliamergulhao.github.io/nexus_aac/"><strong>✧ Acessar portal do estudante</strong></a>
+  <a href="https://juliamergulhao.github.io/nexus_aac/">
+    <strong>✧ Portal do estudante</strong>
+  </a>
   &nbsp;·&nbsp;
-  <a href="https://juliamergulhao.github.io/nexus_aac/NEXUS_admin.html"><strong>⚙ Acessar painel administrativo</strong></a>
+  <a href="https://juliamergulhao.github.io/nexus_aac/NEXUS_admin.html">
+    <strong>⚙ Painel administrativo</strong>
+  </a>
   &nbsp;·&nbsp;
-  <a href="https://github.com/juliamergulhao/nexus_aac/raw/refs/heads/main/Relat%C3%B3rio_NEXUS.docx"><strong>▤ Baixar relatório</strong></a>
+  <a href="https://github.com/juliamergulhao/nexus_aac/blob/main/Relatorio_NEXUS.docx">
+    <strong>▤ Relatório</strong>
+  </a>
   &nbsp;·&nbsp;
-  <a href="https://juliamergulhao.github.io/nexus_aac/Apresenta%C3%A7%C3%A3o_NEXUS.html"><strong>▣ Abrir apresentação</strong></a>
+  <a href="https://juliamergulhao.github.io/nexus_aac/Apresentacao_NEXUS.html">
+    <strong>▣ Apresentação</strong>
+  </a>
 </p>
 
 </div>
