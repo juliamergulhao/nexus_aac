@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEXUS | Universidade Anhembi Morumbi</title>
+  <style>
+    :root {
+      --bg: #f5f5fb;
+      --white: #fff;
+      --text: #202746;
+      --muted: #8189a4;
+      --blue: #7188df;
+      --blue2: #536bc4;
+      --lav: #a99be9;
+      --line: #e8e8f2;
+      --green: #2eaa82;
+      --shadow: 0 8px 28px #2d356410
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh
+    }
+
+    .sidebar {
+      width: 245px;
+      position: fixed;
+      inset: 0 auto 0 0;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      z-index: 5
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 4px 7px 30px
+    }
+
+    .brandicon {
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8295e8, #b5a4ed);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 23px
+    }
+
+    .brand strong {
+      font-size: 19px;
+      letter-spacing: .5px
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px
+    }
+
+    .navlabel {
+      font-size: 10px;
+      font-weight: 700;
+      color: #a0a4b8;
+      letter-spacing: 1.2px;
+      padding: 10px 12px
+    }
+
+    .nav {
+      display: grid;
+      gap: 4px
+    }
+
+    .nav button {
+      border: 0;
+      background: transparent;
+      padding: 12px;
+      border-radius: 11px;
+      text-align: left;
+      color: #727b98;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px
+    }
+
+    .nav button.active,
+    .nav button:hover {
+      background: #f0effd;
+      color: var(--blue2);
+      font-weight: 650
+    }
+
+    .navicon {
+      width: 20px;
+      text-align: center;
+      font-size: 17px
+    }
+
+    .sidebottom {
+      margin-top: auto;
+      border-top: 1px solid var(--line);
+      padding: 17px 7px 0
+    }
+
+    .institution {
+      font-size: 11px;
+      color: #858ba3;
+      line-height: 1.6
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 17px
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e6eaff;
+      color: #6279d0;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 700
+    }
+
+    .profile strong {
+      font-size: 12px;
+      display: block
+    }
+
+    .profile small {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .main {
+      margin-left: 245px;
+      width: calc(100% - 245px);
+      padding: 26px 32px 42px;
+      min-width: 0
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .breadcrumb strong {
+      color: var(--text)
+    }
+
+    .topright {
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
+
+    .date {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .page {
+      display: none
+    }
+
+    .page.active {
+      display: block
+    }
+
+    h1 {
+      font-size: 25px;
+      margin: 0 0 7px
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 0 0 7px
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 23px;
+      line-height: 1.6
+    }
+
+    .welcome {
+      background: linear-gradient(110deg, #e9eaff, #f1edff 65%, #f8f5ff);
+      border: 1px solid #e7e5fb;
+      border-radius: 18px;
+      padding: 25px 27px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px
+    }
+
+    .welcome p {
+      font-size: 12px;
+      color: #697397;
+      margin: 0;
+      line-height: 1.7
+    }
+
+    .welcomeicon {
+      width: 62px;
+      height: 62px;
+      border-radius: 19px;
+      background: #ffffffa8;
+      color: #7a85d5;
+      display: grid;
+      place-items: center;
+      font-size: 30px
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px
+    }
+
+    .stat,
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 18px;
+      box-shadow: var(--shadow)
+    }
+
+    .stat small {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      margin: 8px 0 3px
+    }
+
+    .stat .unit {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400
+    }
+
+    .green {
+      font-size: 10px;
+      color: var(--green)
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px
+    }
+
+    .panel h3 {
+      font-size: 14px;
+      margin: 0 0 16px
+    }
+
+    .panelhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px
+    }
+
+    .panelhead h3 {
+      margin: 0
+    }
+
+    .ringrow {
+      display: flex;
+      align-items: center;
+      gap: 22px
+    }
+
+    .ring {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      background: conic-gradient(var(--blue) 0 70%, #ededf6 70%);
+      display: grid;
+      place-items: center;
+      position: relative;
+      flex-shrink: 0
+    }
+
+    .ring:before {
+      content: "";
+      position: absolute;
+      width: 86px;
+      height: 86px;
+      background: white;
+      border-radius: 50%
+    }
+
+    .ring div {
+      position: relative;
+      text-align: center
+    }
+
+    .ring strong {
+      font-size: 22px;
+      display: block
+    }
+
+    .ring small {
+      font-size: 9px;
+      color: var(--muted)
+    }
+
+    .ringinfo {
+      flex: 1
+    }
+
+    .ringinfo strong {
+      font-size: 13px
+    }
+
+    .ringinfo p {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .bar {
+      height: 7px;
+      border-radius: 20px;
+      background: #eeeef6;
+      overflow: hidden
+    }
+
+    .bar span {
+      height: 100%;
+      display: block;
+      border-radius: 20px;
+      background: var(--blue)
+    }
+
+    .legend {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px
+    }
+
+    .category {
+      margin: 13px 0
+    }
+
+    .catline {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      margin-bottom: 7px
+    }
+
+    .catline span:last-child {
+      color: var(--muted)
+    }
+
+    .activitylist {
+      display: grid
+    }
+
+    .activityitem {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 11px 0;
+      border-bottom: 1px solid #f0f0f6
+    }
+
+    .activityitem:last-child {
+      border: 0
+    }
+
+    .activityicon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #f0efff;
+      display: grid;
+      place-items: center
+    }
+
+    .activityinfo {
+      flex: 1;
+      min-width: 0
+    }
+
+    .activityinfo strong {
+      font-size: 11px;
+      display: block
+    }
+
+    .activityinfo small {
+      font-size: 10px;
+      color: var(--muted);
+      display: block;
+      margin-top: 4px
+    }
+
+    .pill {
+      font-size: 9px;
+      border-radius: 20px;
+      padding: 5px 8px;
+      background: #e9f8f1;
+      color: #27946e;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .pill.pending {
+      background: #fff4e4;
+      color: #b47b2d
+    }
+
+    .shortcuts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px
+    }
+
+    .shortcut {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 13px;
+      padding: 15px;
+      text-align: left
+    }
+
+    .shortcut:hover {
+      border-color: #c9cafa;
+      background: #fafaff
+    }
+
+    .shortcut span {
+      font-size: 21px;
+      display: block;
+      margin-bottom: 9px
+    }
+
+    .shortcut strong {
+      font-size: 11px;
+      display: block
+    }
+
+    .shortcut small {
+      font-size: 10px;
+      color: var(--muted);
+      display: block;
+      margin-top: 5px
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap
+    }
+
+    .search {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 11px 13px;
+      font-size: 11px;
+      min-width: 230px;
+      outline: none
+    }
+
+    .btn {
+      background: var(--blue);
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 15px;
+      font-size: 11px;
+      font-weight: 650
+    }
+
+    .btn:hover {
+      background: var(--blue2)
+    }
+
+    .tablewrap {
+      overflow-x: auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 650px
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 13px 15px;
+      border-bottom: 1px solid #f0f0f5;
+      font-size: 11px
+    }
+
+    th {
+      font-size: 10px;
+      color: var(--muted);
+      background: #fbfbfe
+    }
+
+    td {
+      color: #4d5572
+    }
+
+    td strong {
+      color: var(--text)
+    }
+
+    .docgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .doccard {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px
+    }
+
+    .doccard .docicon {
+      font-size: 24px;
+      margin-bottom: 12px
+    }
+
+    .doccard strong {
+      font-size: 12px
+    }
+
+    .doccard p {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+      min-height: 34px
+    }
+
+    .doccard button {
+      border: 0;
+      background: none;
+      color: var(--blue2);
+      font-size: 10px;
+      padding: 0;
+      font-weight: 700
+    }
+
+    .assistant {
+      height: calc(100vh - 175px);
+      min-height: 490px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow)
+    }
+
+    .assistanthead {
+      padding: 17px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fcfbff
+    }
+
+    .botbrand {
+      display: flex;
+      align-items: center;
+      gap: 11px
+    }
+
+    .botlogo {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #8295e8, #b5a4ed);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 21px
+    }
+
+    .botbrand strong {
+      font-size: 13px
+    }
+
+    .botbrand small {
+      display: block;
+      color: var(--green);
+      font-size: 10px;
+      margin-top: 4px
+    }
+
+    .reset {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 9px;
+      padding: 9px 12px;
+      color: #78809b;
+      font-size: 10px
+    }
+
+    .chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      max-width: 88%
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse
+    }
+
+    .botavatar {
+      width: 31px;
+      height: 31px;
+      border-radius: 50%;
+      background: #f0edff;
+      color: #8d80d4;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0
+    }
+
+    .bubble {
+      background: #f6f5fb;
+      border: 1px solid #ebe9f5;
+      padding: 12px 14px;
+      border-radius: 13px;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #35405f;
+      overflow-wrap: anywhere
+    }
+
+    .message.user .bubble {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue)
+    }
+
+    .feedbackbar {
+      border-top: 1px solid #e8e7ef;
+      margin-top: 9px;
+      padding-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap
+    }
+
+    .feedbackbar small {
+      font-size: 9px;
+      color: #9299ad;
+      margin-right: 3px
+    }
+
+    .feedbackbtn {
+      border: 1px solid #e4e4ed;
+      background: #fff;
+      border-radius: 8px;
+      padding: 6px 9px;
+      font-size: 12px;
+      color: #536080
+    }
+
+    .feedbackbtn:hover {
+      border-color: #9ba8e5
+    }
+
+    .feedbackbtn.selected {
+      background: #e9f8f1;
+      border-color: #b8e6d2
+    }
+
+    .feedbackbtn:disabled {
+      opacity: .55;
+      cursor: default
+    }
+
+    .compose {
+      border-top: 1px solid var(--line);
+      padding: 13px 16px;
+      display: flex;
+      gap: 9px
+    }
+
+    .compose input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 12px;
+      font-size: 11px;
+      outline: none
+    }
+
+    .compose button {
+      width: 44px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--blue);
+      color: white;
+      font-size: 17px
+    }
+
+    .suggestions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      padding: 0 16px 11px
+    }
+
+    .suggestions button {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 20px;
+      padding: 7px 10px;
+      color: #697493;
+      font-size: 10px
+    }
+
+    .footer {
+      text-align: center;
+      color: #a0a5b8;
+      font-size: 10px;
+      padding: 23px 0 0
+    }
+
+    .modal[hidden] {
+      display: none !important
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: #1c214d77;
+      backdrop-filter: blur(4px);
+      display: grid;
+      place-items: center;
+      padding: 18px
+    }
+
+    .modalcard {
+      background: white;
+      width: min(720px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 25px 80px #1c214d44
+    }
+
+    .modalhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 18px
+    }
+
+    .modalhead h2 {
+      font-size: 19px
+    }
+
+    .close {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 9px;
+      width: 34px;
+      height: 34px
+    }
+
+    .formgrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px
+    }
+
+    .formgroup {
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .formgroup.full {
+      grid-column: 1/-1
+    }
+
+    .formgroup label {
+      font-size: 11px;
+      font-weight: 650;
+      color: #59617f
+    }
+
+    .field {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-size: 12px;
+      outline: none;
+      background: #fff;
+      color: var(--text)
+    }
+
+    .field:focus {
+      border-color: #9aa6e6;
+      box-shadow: 0 0 0 3px #7188df20
+    }
+
+    .fieldarea {
+      min-height: 80px;
+      resize: vertical
+    }
+
+    .formactions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      margin-top: 19px
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+      background: white;
+      color: #69718e;
+      border-radius: 10px;
+      padding: 11px 15px;
+      font-size: 11px
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 90;
+      background: #263653;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      box-shadow: var(--shadow)
+    }
+
+    @media(max-width:1050px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .columns {
+        grid-template-columns: 1fr
+      }
+
+      .docgrid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:700px) {
+      .sidebar {
+        width: 68px;
+        padding: 15px 8px
+      }
+
+      .brand {
+        padding: 4px 3px 25px
+      }
+
+      .brandtext,
+      .navlabel,
+      .nav button span:not(.navicon),
+      .institution,
+      .profiletext {
+        display: none
+      }
+
+      .nav button {
+        justify-content: center;
+        padding: 13px 4px
+      }
+
+      .main {
+        margin-left: 68px;
+        width: calc(100% - 68px);
+        padding: 17px 12px
+      }
+
+      .date {
+        display: none
+      }
+
+      .welcome {
+        padding: 18px
+      }
+
+      .welcomeicon {
+        display: none
+      }
+
+      .stats {
+        gap: 8px
+      }
+
+      .stat {
+        padding: 13px
+      }
+
+      .stat strong {
+        font-size: 21px
+      }
+
+      .docgrid {
+        grid-template-columns: 1fr
+      }
+
+      .shortcuts {
+        grid-template-columns: 1fr
+      }
+
+      .formgrid {
+        grid-template-columns: 1fr
+      }
+
+      .formgroup.full {
+        grid-column: auto
+      }
+
+      .message {
+        max-width: 96%
+      }
+
+      .assistant {
+        height: calc(100vh - 145px)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brandicon">✧</div>
+        <div class="brandtext"><strong>NEXUS</strong><small>PORTAL ACADÊMICO</small></div>
+      </div>
+      <div class="navlabel">MENU PRINCIPAL</div>
+      <nav class="nav">
+        <button class="active" data-page="overview"><span class="navicon">⌂</span><span>Visão geral</span></button>
+        <button data-page="activities"><span class="navicon">▤</span><span>Minhas atividades</span></button>
+        <button data-page="documents"><span class="navicon">▧</span><span>Documentos</span></button>
+        <button data-page="assistant"><span class="navicon">✧</span><span>Assistente virtual</span></button>
+      </nav>
+      <div class="sidebottom">
+        <div class="institution">Universidade Anhembi Morumbi<br>Portal de Atividades Acadêmicas Complementares</div>
+        <div class="profile">
+          <div class="avatar">JN</div>
+          <div class="profiletext"><strong>Julia Nunes</strong><small>Estudante</small></div>
+        </div>
+      </div>
+    </aside>
+    <main class="main">
+      <div class="topbar">
+        <div class="breadcrumb">NEXUS / <strong id="crumb">Visão geral</strong></div>
+        <div class="topright"><span class="date" id="today"></span>
+          <div class="avatar">JN</div>
+        </div>
+      </div>
+      <section class="page active" id="overview">
+        <div class="welcome">
+          <div>
+            <h2>Olá, Julia! Seja bem-vinda ao NEXUS.</h2>
+            <p>Acompanhe suas Atividades Acadêmicas Complementares, consulte documentos e encontre orientações para
+              organizar sua trajetória acadêmica.</p>
+          </div>
+          <div class="welcomeicon">✧</div>
+        </div>
+        <div class="stats">
+          <div class="stat"><small>Carga horária concluída</small><strong id="doneHours">140 <span
+                class="unit">horas</span></strong><span class="green">70% da carga horária</span></div>
+          <div class="stat"><small>Horas pendentes</small><strong id="pendingHours">60 <span
+                class="unit">horas</span></strong><small>Para completar o requisito</small></div>
+          <div class="stat"><small>Carga horária total</small><strong>200 <span
+                class="unit">horas</span></strong><small>Meta cadastrada</small></div>
+          <div class="stat"><small>Atividades validadas</small><strong id="approvedCount">5</strong><small>Registros
+              aprovados</small></div>
+        </div>
+        <div class="columns">
+          <div class="panel">
+            <h3>Progresso da carga horária</h3>
+            <div class="ringrow">
+              <div class="ring">
+                <div><strong id="percent">70%</strong><small>CONCLUÍDO</small></div>
+              </div>
+              <div class="ringinfo"><strong id="progressText">140 de 200 horas</strong>
+                <p>Continue registrando suas atividades para completar a carga horária.</p>
+                <div class="bar"><span id="progressBar" style="width:70%"></span></div>
+                <div class="legend"><span><i class="dot" style="background:#7188df"></i>Concluídas</span><span><i
+                      class="dot" style="background:#ededf6"></i>Pendentes</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Distribuição por categoria</h3>
+            <div class="category">
+              <div class="catline"><span>Cursos e capacitações</span><span>40h</span></div>
+              <div class="bar"><span style="width:80%"></span></div>
+            </div>
+            <div class="category">
+              <div class="catline"><span>Eventos e palestras</span><span>30h</span></div>
+              <div class="bar"><span style="width:60%;background:#a99be9"></span></div>
+            </div>
+            <div class="category">
+              <div class="catline"><span>Projetos acadêmicos</span><span>45h</span></div>
+              <div class="bar"><span style="width:90%;background:#70b9aa"></span></div>
+            </div>
+            <div class="category">
+              <div class="catline"><span>Outras atividades</span><span>25h</span></div>
+              <div class="bar"><span style="width:50%;background:#e6b66e"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel" style="margin-bottom:17px">
+          <div class="panelhead">
+            <h3>Atividades recentes</h3><button class="secondary" onclick="showPage('activities')">Ver todas →</button>
+          </div>
+          <div class="activitylist" id="recentList"></div>
+        </div>
+        <div class="panel">
+          <h3>Acesso rápido</h3>
+          <div class="shortcuts"><button class="shortcut" onclick="showPage('activities')"><span>▤</span><strong>Minhas
+                atividades</strong><small>Consulte seus registros e horas</small></button><button class="shortcut"
+              onclick="showPage('documents')"><span>📄</span><strong>Documentos</strong><small>Acesse regulamentos e
+                orientações</small></button><button class="shortcut"
+              onclick="showPage('assistant')"><span>✧</span><strong>Assistente NEXUS</strong><small>Tire dúvidas sobre
+                AAC</small></button></div>
+        </div>
+        <div class="footer">NEXUS · Universidade Anhembi Morumbi</div>
+      </section>
+      <section class="page" id="activities">
+        <h1>Minhas atividades</h1>
+        <p class="subtitle">Consulte seus registros e acompanhe a situação de cada atividade complementar.</p>
+        <div class="toolbar"><input class="search" id="activitySearch" placeholder="Buscar atividade..."
+            oninput="renderActivities()"><button class="btn" onclick="openModal()">＋ Registrar atividade</button></div>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ATIVIDADE</th>
+                <th>CATEGORIA</th>
+                <th>DATA</th>
+                <th>CARGA HORÁRIA</th>
+                <th>SITUAÇÃO</th>
+              </tr>
+            </thead>
+            <tbody id="activityTable"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page" id="documents">
+        <h1>Documentos e orientações</h1>
+        <p class="subtitle">Informações para organizar e acompanhar suas Atividades Acadêmicas Complementares.</p>
+        <div class="docgrid">
+          <div class="doccard">
+            <div class="docicon">📘</div><strong>Regulamento de AAC</strong>
+            <p>Critérios, categorias e orientações para validação das atividades.</p><button
+              onclick="docInfo('Regulamento de AAC','Consulte os critérios e limites definidos para o seu curso. Confirme sempre a versão vigente nos canais acadêmicos da Universidade Anhembi Morumbi.')">Consultar
+              orientações →</button>
+          </div>
+          <div class="doccard">
+            <div class="docicon">📋</div><strong>Orientações para certificados</strong>
+            <p>Dados necessários para comprovar a participação em atividades.</p><button
+              onclick="docInfo('Orientações para certificados','O comprovante deve identificar o estudante, a atividade, a instituição responsável, a data e a carga horária. A aceitação depende da análise acadêmica.')">Consultar
+              orientações →</button>
+          </div>
+          <div class="doccard">
+            <div class="docicon">🗂️</div><strong>Categorias de atividades</strong>
+            <p>Conheça os tipos de atividades que podem compor sua carga horária.</p><button
+              onclick="docInfo('Categorias de atividades','Cursos, eventos, projetos, pesquisa, extensão, monitoria, atividades culturais e voluntariado são exemplos de categorias que podem ser consideradas, conforme as regras do curso.')">Consultar
+              orientações →</button>
+          </div>
+          <div class="doccard">
+            <div class="docicon">⏱️</div><strong>Acompanhamento de horas</strong>
+            <p>Entenda como acompanhar horas concluídas e pendentes.</p><button
+              onclick="docInfo('Acompanhamento de horas','Somente atividades validadas são contabilizadas como horas concluídas. Registros em análise permanecem pendentes até a decisão.')">Consultar
+              orientações →</button>
+          </div>
+          <div class="doccard">
+            <div class="docicon">🎓</div><strong>Vida acadêmica</strong>
+            <p>Orientações para o desenvolvimento da sua trajetória acadêmica.</p><button
+              onclick="docInfo('Vida acadêmica','Consulte os canais oficiais da Universidade Anhembi Morumbi para informações específicas do seu curso e calendário acadêmico.')">Consultar
+              orientações →</button>
+          </div>
+          <div class="doccard">
+            <div class="docicon">💬</div><strong>Central de atendimento</strong>
+            <p>Orientações sobre registros e validação de atividades.</p><button onclick="showPage('assistant')">Acessar
+              assistente →</button>
+          </div>
+        </div>
+      </section>
+      <section class="page" id="assistant">
+        <h1>Assistente virtual</h1>
+        <p class="subtitle">Tire dúvidas sobre suas Atividades Acadêmicas Complementares.</p>
+        <div class="assistant">
+          <div class="assistanthead">
+            <div class="botbrand">
+              <div class="botlogo">✧</div>
+              <div><strong>NEXUS Assistente AAC</strong><small>● Disponível · Base de conhecimento</small></div>
+            </div><button class="reset" onclick="resetChat()">Reiniciar conversa</button>
+          </div>
+          <div class="chat" id="chat" aria-live="polite">
+            <div class="message">
+              <div class="botavatar">✧</div>
+              <div class="bubble">Olá! Sou o assistente NEXUS da Universidade Anhembi Morumbi. Posso ajudar com carga
+                horária, certificados, cursos, eventos, prazos e atividades complementares.</div>
+            </div>
+          </div>
+          <div class="suggestions"><button onclick="askSuggestion('Qual é a carga horária total de AAC?')">Carga horária
+              total</button><button onclick="askSuggestion('Quais atividades posso realizar?')">Tipos de
+              atividades</button><button onclick="askSuggestion('Como faço para validar um certificado?')">Validar
+              certificado</button><button onclick="askSuggestion('Como acompanho minhas horas?')">Acompanhar
+              horas</button></div>
+          <form class="compose" id="chatForm"><input id="chatInput" placeholder="Digite sua dúvida..."
+              autocomplete="off"><button aria-label="Enviar">➤</button></form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="activityModal" hidden>
+    <div class="modalcard" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalhead">
+        <div>
+          <h2 id="modalTitle">Registrar nova atividade</h2>
+          <p class="subtitle">Preencha os dados e envie seu comprovante.</p>
+        </div><button class="close" type="button" onclick="closeModal()">×</button>
+      </div>
+      <form id="activityForm">
+        <div class="formgrid">
+          <div class="formgroup"><label>Nome da atividade *</label><input class="field" id="activityName" required
+              maxlength="120" placeholder="Ex.: Curso de Excel"></div>
+          <div class="formgroup"><label>Categoria *</label><select class="field" id="activityCategory" required>
+              <option>Cursos e capacitações</option>
+              <option>Eventos e palestras</option>
+              <option>Projetos acadêmicos</option>
+              <option>Pesquisa científica</option>
+              <option>Extensão universitária</option>
+              <option>Monitoria</option>
+              <option>Atividades culturais</option>
+              <option>Voluntariado</option>
+              <option>Outras atividades</option>
+            </select></div>
+          <div class="formgroup"><label>Instituição responsável *</label><input class="field" id="activityInstitution"
+              required placeholder="Ex.: XYZ Institute"></div>
+          <div class="formgroup"><label>Data de realização *</label><input class="field" id="activityDate" type="date"
+              required></div>
+          <div class="formgroup full"><label>Descrição</label><textarea class="field fieldarea" id="activityDescription"
+              placeholder="Detalhes da atividade"></textarea></div>
+          <div class="formgroup"><label>Carga horária (h) *</label><input class="field" id="activityHours" type="number"
+              min="1" max="500" required></div>
+          <div class="formgroup"><label>Certificado (PDF, JPG ou PNG)</label><input class="field" id="activityFile"
+              type="file" accept=".pdf,.jpg,.jpeg,.png"><small style="color:var(--muted)">Máximo de 5 MB. O arquivo fica
+              local neste protótipo.</small></div>
+          <div class="formgroup full"><label>Observações</label><textarea class="field fieldarea" id="activityNotes"
+              placeholder="Observações adicionais"></textarea></div>
+        </div>
+        <div class="formactions"><button class="secondary" type="button" onclick="closeModal()">Cancelar</button><button
+            class="btn" type="submit">Enviar atividade</button></div>
+      </form>
+    </div>
+  </div>
+  <div id="toastArea"></div>
+  <script>
+    "use strict";
+    const KEY_FEEDBACK = "nexus_aac_feedback_v1", KEY_RULES = "nexus_aac_custom_rules_v1", KEY_ACTIVITIES = "nexus_aac_student_activities_v1";
+    const BASE_ACTIVITIES = [
+      { name: "Curso de Excel e análise de dados", category: "Cursos e capacitações", date: "12/03/2026", hours: 20, status: "Validada", institution: "FIAP", icon: "📊" },
+      { name: "Introdução à Ciência de Dados", category: "Cursos e capacitações", date: "28/03/2026", hours: 20, status: "Validada", institution: "FIAP", icon: "💻" },
+      { name: "Semana de Tecnologia e Inovação", category: "Eventos e palestras", date: "15/04/2026", hours: 30, status: "Validada", institution: "Universidade Anhembi Morumbi", icon: "🎤" },
+      { name: "Projeto interdisciplinar de tecnologia", category: "Projetos acadêmicos", date: "10/05/2026", hours: 45, status: "Validada", institution: "Universidade Anhembi Morumbi", icon: "🧩" },
+      { name: "Workshop de desenvolvimento profissional", category: "Outras atividades", date: "20/08/2026", hours: 25, status: "Validada", institution: "Instituição parceira", icon: "🚀" }
+    ];
+    const BASE_RULES = [
+      { id: "total", name: "Carga horária total", keywords: ["carga horaria", "horas totais", "quantas horas", "meta total"], answer: "A carga horária total cadastrada neste ambiente é de 200 horas de Atividades Acadêmicas Complementares. Consulte o regulamento do seu curso para confirmar os critérios aplicáveis.", weight: 4 },
+      { id: "pending", name: "Horas pendentes", keywords: ["faltam", "pendentes", "restam", "quanto falta"], answer: "Seu painel apresenta 140 horas concluídas de um total de 200 horas. Portanto, faltam 60 horas para completar a carga horária.", weight: 5 },
+      { id: "done", name: "Horas concluídas", keywords: ["horas concluidas", "ja completei", "meu progresso", "quanto completei"], answer: "Você possui 140 horas validadas de um total de 200 horas, o que representa 70% da carga horária.", weight: 4 },
+      { id: "activities", name: "Atividades aceitas", keywords: ["atividades aceitas", "quais atividades", "palestras", "eventos", "voluntariado", "cursos"], answer: "Exemplos de atividades complementares incluem cursos, palestras, eventos acadêmicos, projetos, pesquisa, extensão, monitoria e voluntariado. A validação depende dos critérios do seu curso.", weight: 3 },
+      { id: "certificate", name: "Certificados", keywords: ["certificado", "comprovante", "documento", "validar", "validacao"], answer: "O certificado deve identificar o estudante, a atividade, a instituição responsável, a data e a carga horária. Após o envio, o registro permanece em análise até a validação.", weight: 4 },
+      { id: "deadline", name: "Prazos", keywords: ["prazo", "data limite", "quando aprova", "demora"], answer: "Os prazos de envio e análise devem ser consultados nos comunicados e no calendário acadêmico do curso. Recomendo encaminhar os comprovantes com antecedência.", weight: 3 },
+      { id: "status", name: "Status de atividade", keywords: ["status", "acompanhar atividade", "situacao", "em analise", "reprovada"], answer: "Você pode acompanhar a situação dos registros na seção Minhas atividades. Somente registros validados são contabilizados nas horas concluídas.", weight: 3 }
+    ];
+    const STOP = new Set(["qual", "quais", "quanto", "quantos", "quantas", "como", "onde", "quando", "porque", "para", "com", "sem", "uma", "uns", "dos", "das", "que", "tem", "ter", "de", "do", "da", "no", "na", "em", "e", "ou", "meu", "minha", "sobre", "aac", "atividade", "atividades"]);
+    function read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback } catch { return fallback } }
+    function write(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); return true } catch { toast("Não foi possível salvar os dados neste navegador."); return false } }
+    function normalize(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim() }
+    function getRules() { return [...read(KEY_RULES, []), ...BASE_RULES] }
+function scoreRule(question, rule, ruleIndex = 0) {
+      const questionWords = normalize(question).split(" ").filter(Boolean);
+      const meaningfulQuestionWords = questionWords.filter(word => word.length > 2 && !STOP.has(word));
+      let rawScore = 0, specificity = 0;
+      const matched = [];
+      (rule.keywords || []).forEach(keyword => {
+        const keyWords = normalize(keyword).split(" ").filter(Boolean);
+        if (!keyWords.length) return;
+        let exactPhrase = false;
+        for (let i = 0; i <= questionWords.length - keyWords.length; i++) {
+          if (keyWords.every((word, position) => questionWords[i + position] === word)) {
+            exactPhrase = true;
+            break;
+          }
+        }
+        if (exactPhrase) {
+          const points = 14 + keyWords.length * 5;
+          rawScore += points;
+          specificity = Math.max(specificity, points + keyWords.length * 10);
+          matched.push(keyword);
+          return;
+        }
+        const meaningful = keyWords.filter(word => word.length > 2 && !STOP.has(word));
+        const hits = [...new Set(meaningful.filter(word => meaningfulQuestionWords.includes(word)))];
+        if (hits.length) {
+          const coverage = hits.length / Math.max(meaningful.length, 1);
+          rawScore += hits.length * 3;
+          if (coverage >= 0.75) rawScore += 4;
+          specificity = Math.max(specificity, hits.length * 2 + coverage * 5);
+          matched.push(...hits);
+        }
+      });
+      const weight = Math.min(10, Math.max(1, Number(rule.weight) || 1));
+      return { rawScore, score: rawScore * weight, specificity, matched: [...new Set(matched)], ruleIndex };
+    }
+    function selectBestRule(question) {
+      const matches = getRules().map((rule, index) => ({ rule, ...scoreRule(question, rule, index) }))
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score || b.specificity - a.specificity || b.rawScore - a.rawScore || a.ruleIndex - b.ruleIndex);
+      return matches[0] || null;
+    }
+    function bestRule(question) {
+      const best = selectBestRule(question);
+      return best ? { ...best, answer: best.rule.answer } : {
+        rule: null, score: 0, rawScore: 0, specificity: 0, matched: [],
+        answer: "Ainda não encontrei uma resposta específica para essa dúvida. Tente reformular sua pergunta ou consulte a coordenação acadêmica. Sua avaliação ajuda a melhorar o assistente."
+      };
+    }
+    function toast(message) { const t = document.createElement("div"); t.className = "toast"; t.textContent = message; document.body.appendChild(t); setTimeout(() => t.remove(), 3000) }
+    function showPage(id) { document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id)); document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.page === id)); document.getElementById("crumb").textContent = ({ overview: "Visão geral", activities: "Minhas atividades", documents: "Documentos", assistant: "Assistente virtual" })[id]; if (id === "activities") renderActivities() }
+    document.querySelectorAll(".nav button").forEach(b => b.addEventListener("click", () => showPage(b.dataset.page)));
+    document.getElementById("today").textContent = new Intl.DateTimeFormat("pt-BR", { dateStyle: "long" }).format(new Date());
+    function allActivities() { return [...BASE_ACTIVITIES, ...read(KEY_ACTIVITIES, [])] }
+    function renderRecent() { document.getElementById("recentList").innerHTML = allActivities().slice(-3).reverse().map(a => `<div class="activityitem"><div class="activityicon">${a.icon || "📚"}</div><div class="activityinfo"><strong>${escapeHTML(a.name)}</strong><small>${escapeHTML(a.category)} · ${escapeHTML(a.date)}</small></div><span class="pill ${a.status === "Validada" ? "" : "pending"}">${escapeHTML(a.status)}</span></div>`).join("") }
+    function renderActivities() { const q = (document.getElementById("activitySearch").value || "").toLowerCase(); const rows = allActivities().filter(a => (a.name + " " + a.category + " " + a.status).toLowerCase().includes(q)); document.getElementById("activityTable").innerHTML = rows.map(a => `<tr><td><strong>${escapeHTML(a.name)}</strong></td><td>${escapeHTML(a.category)}</td><td>${escapeHTML(a.date)}</td><td>${Number(a.hours)}h</td><td><span class="pill ${a.status === "Validada" ? "" : "pending"}">${escapeHTML(a.status)}</span></td></tr>`).join("") }
+    function escapeHTML(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])) }
+    function openModal() { document.getElementById("activityModal").hidden = false; document.body.style.overflow = "hidden" }
+    function closeModal() { document.getElementById("activityModal").hidden = true; document.body.style.overflow = "" }
+    document.getElementById("activityModal").addEventListener("click", e => { if (e.target.id === "activityModal") closeModal() });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal() });
+    document.getElementById("activityForm").addEventListener("submit", e => { e.preventDefault(); const f = document.getElementById("activityFile").files[0]; if (f && f.size > 5 * 1024 * 1024) { toast("O certificado deve ter no máximo 5 MB."); return } const d = document.getElementById("activityDate").value.split("-"); const row = { id: "aac-" + Date.now(), name: document.getElementById("activityName").value.trim(), category: document.getElementById("activityCategory").value, institution: document.getElementById("activityInstitution").value.trim(), description: document.getElementById("activityDescription").value.trim(), date: d.reverse().join("/"), hours: Number(document.getElementById("activityHours").value), certificateName: f?.name || "", notes: document.getElementById("activityNotes").value.trim(), status: "Em análise", icon: "📚" }; const items = read(KEY_ACTIVITIES, []); items.push(row); if (!write(KEY_ACTIVITIES, items)) return; e.target.reset(); closeModal(); renderActivities(); renderRecent(); toast("Atividade enviada para análise.") });
+    function docInfo(title, content) { alert(title + "\n\n" + content) }
+    function addMessage(text, type = "bot", question = null, meta = null) { const row = document.createElement("div"); row.className = "message" + (type === "user" ? " user" : ""); const av = document.createElement("div"); av.className = "botavatar"; av.textContent = type === "user" ? "JN" : "✧"; const bubble = document.createElement("div"); bubble.className = "bubble"; bubble.textContent = text; if (type === "bot" && question !== null) { const bar = document.createElement("div"); bar.className = "feedbackbar"; const label = document.createElement("small"); label.textContent = "Esta resposta foi útil?"; const up = document.createElement("button"); up.type = "button"; up.className = "feedbackbtn"; up.textContent = "👍"; up.setAttribute("aria-label", "Resposta útil"); const down = document.createElement("button"); down.type = "button"; down.className = "feedbackbtn"; down.textContent = "👎"; down.setAttribute("aria-label", "Resposta não útil"); up.addEventListener("click", () => submitFeedback(question, text, "positivo", bar, up, down, meta)); down.addEventListener("click", () => submitFeedback(question, text, "negativo", bar, up, down, meta)); bar.append(label, up, down); bubble.append(bar) } row.append(av, bubble); document.getElementById("chat").append(row); document.getElementById("chat").scrollTop = 999999 }
+    function submitFeedback(question, answer, rating, bar, up, down, meta) { if (bar.dataset.sent === "1") return; const items = read(KEY_FEEDBACK, []); items.push({ id: "fb-" + Date.now(), question, answer, rating, ruleId: meta.rule?.id || "", ruleName: meta.rule?.name || "Resposta padrão", score: meta.score || 0, matched: meta.matched || [], date: new Date().toISOString() }); if (!write(KEY_FEEDBACK, items)) return; bar.dataset.sent = "1"; up.disabled = true; down.disabled = true; (rating === "positivo" ? up : down).classList.add("selected"); bar.querySelector("small").textContent = rating === "positivo" ? "Obrigado pela avaliação!" : "Obrigado! Vamos revisar essa resposta."; toast(rating === "positivo" ? "Avaliação positiva registrada." : "Feedback enviado para análise e treinamento.") }
+    function ask(q) { if (!q.trim()) return; addMessage(q, "user"); const result = bestRule(q); setTimeout(() => addMessage(result.answer, "bot", q, result), 220) }
+    document.getElementById("chatForm").addEventListener("submit", e => { e.preventDefault(); const input = document.getElementById("chatInput"), q = input.value; input.value = ""; ask(q) });
+    function askSuggestion(q) { showPage("assistant"); ask(q) }
+    function resetChat() { document.getElementById("chat").innerHTML = ""; addMessage("Olá! Sou o assistente NEXUS da Universidade Anhembi Morumbi. Como posso ajudar com suas atividades complementares?") }
+    renderRecent(); renderActivities();
+  </script>
+</body>
+
+</html>
