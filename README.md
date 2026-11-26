@@ -13,18 +13,25 @@
 </p>
 
 <p>
-  <a href="NEXUS_index.html"><strong>✧ Portal do estudante</strong></a>
+  <a href="https://juliamergulhao.github.io/nexus_aac/"><strong>✧ Acessar portal do estudante</strong></a>
   &nbsp;·&nbsp;
-  <a href="NEXUS_admin.html"><strong>⚙ Painel administrativo</strong></a>
+  <a href="https://juliamergulhao.github.io/nexus_aac/NEXUS_admin.html"><strong>⚙ Acessar painel administrativo</strong></a>
   &nbsp;·&nbsp;
-  <a href="Relatorio_NEXUS.docx"><strong>▤ Relatório</strong></a>
+  <a href="Relatório_NEXUS.docx"><strong>▤ Baixar relatório</strong></a>
   &nbsp;·&nbsp;
-  <a href="Apresentacao_NEXUS.html"><strong>▣ Apresentação</strong></a>
+  <a href="Apresentação_NEXUS.html"><strong>▣ Abrir apresentação</strong></a>
 </p>
 
 </div>
 
 ---
+
+## 🌐 Acesse o NEXUS online
+
+- **Portal do estudante:** [https://juliamergulhao.github.io/nexus_aac/](https://juliamergulhao.github.io/nexus_aac/)
+- **Painel administrativo:** [https://juliamergulhao.github.io/nexus_aac/NEXUS_admin.html](https://juliamergulhao.github.io/nexus_aac/NEXUS_admin.html)
+
+> O painel administrativo utiliza uma senha demonstrativa. Os dados do protótipo são armazenados localmente no navegador.
 
 ## 📌 Sobre o projeto
 
@@ -42,7 +49,7 @@ O projeto também possui um painel administrativo para acompanhar as avaliaçõe
 
 ## 🖥️ Módulos da aplicação
 
-### 1. Portal do estudante — `NEXUS_index.html`
+### 1. Portal do estudante — `index.html`
 
 - **Visão geral:** indicadores demonstrativos de carga horária e progresso.
 - **Minhas atividades:** consulta, pesquisa e cadastro de atividades.
@@ -97,7 +104,7 @@ Nova resposta nas próximas consultas
 ```text
 nexus_aac/
 │
-├── NEXUS_index.html          # Portal do estudante
+├── index.html                # Portal do estudante
 ├── NEXUS_admin.html          # Painel administrativo
 ├── Apresentacao_NEXUS.html   # Apresentação interativa do projeto
 ├── Relatorio_NEXUS.docx     # Relatório acadêmico
@@ -109,7 +116,7 @@ nexus_aac/
 A aplicação é um protótipo front-end e não exige instalação de dependências.
 
 1. Faça o download ou clone este repositório.
-2. Abra `NEXUS_index.html` em um navegador atualizado.
+2. Abra `index.html` em um navegador atualizado.
 3. Para acessar a administração, abra `NEXUS_admin.html`.
 4. Utilize a senha demonstrativa do painel: `NEXUS2026`.
 
