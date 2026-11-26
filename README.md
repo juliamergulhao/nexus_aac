@@ -21,7 +21,7 @@
     <strong>⚙ Painel administrativo</strong>
   </a>
   &nbsp;·&nbsp;
-  <a href="https://github.com/juliamergulhao/nexus_aac/blob/main/Relatorio_NEXUS.docx">
+  <a href="https://raw.githubusercontent.com/juliamergulhao/nexus_aac/main/Relatorio_NEXUS.docx">
     <strong>▤ Relatório</strong>
   </a>
   &nbsp;·&nbsp;
