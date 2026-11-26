@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEXUS | Administração</title>
+  <style>
+    :root {
+      --bg: #f4f5fb;
+      --white: #fff;
+      --text: #202746;
+      --muted: #8189a4;
+      --blue: #7188df;
+      --blue2: #536bc4;
+      --lav: #a99be9;
+      --line: #e8e8f2;
+      --green: #2eaa82;
+      --red: #d66d78;
+      --amber: #c38a35;
+      --shadow: 0 8px 28px #2d356410
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    .login {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #eeedff, #f7f7fc)
+    }
+
+    .loginbox {
+      width: min(410px, 100%);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow)
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #8295e8, #b5a4ed);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin-bottom: 18px
+    }
+
+    .login h1 {
+      font-size: 24px;
+      margin: 0 0 8px
+    }
+
+    .login p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .login label,
+    .label {
+      display: block;
+      font-size: 11px;
+      font-weight: 650;
+      color: #59617f;
+      margin: 14px 0 6px
+    }
+
+    .field {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 11px 12px;
+      font-size: 12px;
+      outline: none;
+      background: #fff;
+      color: var(--text)
+    }
+
+    .field:focus {
+      border-color: #9aa6e6;
+      box-shadow: 0 0 0 3px #7188df20
+    }
+
+    .btn {
+      border: 0;
+      background: var(--blue);
+      color: white;
+      border-radius: 10px;
+      padding: 11px 15px;
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .btn:hover {
+      background: var(--blue2)
+    }
+
+    .btn.full {
+      width: 100%;
+      margin-top: 15px
+    }
+
+    .error {
+      color: var(--red);
+      font-size: 11px;
+      min-height: 16px
+    }
+
+    .hint {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 9px
+    }
+
+    .app {
+      display: none;
+      min-height: 100vh
+    }
+
+    .sidebar {
+      width: 245px;
+      position: fixed;
+      inset: 0 auto 0 0;
+      background: white;
+      border-right: 1px solid var(--line);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 4px 7px 30px
+    }
+
+    .brandicon {
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8295e8, #b5a4ed);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 23px
+    }
+
+    .brand strong {
+      font-size: 19px
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px
+    }
+
+    .navlabel {
+      font-size: 10px;
+      color: #a0a4b8;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 10px 12px
+    }
+
+    .nav {
+      display: grid;
+      gap: 5px
+    }
+
+    .nav button {
+      border: 0;
+      background: transparent;
+      text-align: left;
+      padding: 12px;
+      border-radius: 11px;
+      color: #727b98;
+      font-size: 13px
+    }
+
+    .nav button.active,
+    .nav button:hover {
+      background: #f0effd;
+      color: var(--blue2);
+      font-weight: 650
+    }
+
+    .sidebottom {
+      margin-top: auto;
+      border-top: 1px solid var(--line);
+      padding: 17px 7px 0;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .main {
+      margin-left: 245px;
+      padding: 26px 32px 45px;
+      min-width: 0
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px
+    }
+
+    .crumb {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .topbar button {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 9px;
+      padding: 9px 12px;
+      color: #69718e;
+      font-size: 11px
+    }
+
+    .page {
+      display: none
+    }
+
+    .page.active {
+      display: block
+    }
+
+    h1 {
+      font-size: 25px;
+      margin: 0 0 7px
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 22px;
+      line-height: 1.6
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px
+    }
+
+    .stat,
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 18px;
+      box-shadow: var(--shadow)
+    }
+
+    .stat small {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      margin-top: 8px
+    }
+
+    .stat .green {
+      color: var(--green)
+    }
+
+    .stat .red {
+      color: var(--red)
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px
+    }
+
+    .panel h3 {
+      font-size: 14px;
+      margin: 0 0 15px
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px
+    }
+
+    .search {
+      width: min(300px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 10px 12px;
+      font-size: 11px;
+      outline: none
+    }
+
+    .tablewrap {
+      overflow: auto;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 13px
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 600px
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 13px 14px;
+      border-bottom: 1px solid #f0f0f5;
+      font-size: 11px
+    }
+
+    th {
+      font-size: 10px;
+      color: var(--muted);
+      background: #fbfbfe
+    }
+
+    td {
+      color: #4d5572
+    }
+
+    td strong {
+      color: var(--text)
+    }
+
+    .pill {
+      font-size: 9px;
+      border-radius: 20px;
+      padding: 5px 8px;
+      background: #e9f8f1;
+      color: #27946e;
+      font-weight: 700
+    }
+
+    .pill.negative {
+      background: #fff0f1;
+      color: #c65e6c
+    }
+
+    .pill.pending {
+      background: #fff4e4;
+      color: #b47b2d
+    }
+
+    .feedbackcard,
+    .rulecard {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 15px;
+      margin: 11px 0;
+      background: #fff
+    }
+
+    .feedbackcard p {
+      font-size: 11px;
+      line-height: 1.6;
+      color: #59617f;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere
+    }
+
+    .feedbackcard .meta,
+    .rulecard small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+      margin-top: 7px
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px
+    }
+
+    .smallbtn {
+      border: 1px solid var(--line);
+      background: #f8f8fd;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 10px;
+      color: #536080
+    }
+
+    .smallbtn.primary {
+      background: #eef0ff;
+      color: var(--blue2);
+      border-color: #dcdafa
+    }
+
+    .smallbtn.danger {
+      color: var(--red)
+    }
+
+    .formsection {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 17px;
+      margin: 15px 0;
+      background: #fff
+    }
+
+    .formsection h3 {
+      margin: 0 0 14px
+    }
+
+    .textarea {
+      min-height: 115px;
+      resize: vertical
+    }
+
+    .formactions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 9px;
+      padding: 10px 13px;
+      font-size: 10px;
+      color: #69718e
+    }
+
+    .empty {
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 20;
+      background: #263653;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      box-shadow: var(--shadow)
+    }
+
+    @media(max-width:900px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:650px) {
+      .sidebar {
+        width: 65px;
+        padding: 15px 7px
+      }
+
+      .brand {
+        padding: 4px 3px 25px
+      }
+
+      .brandtext,
+      .navlabel,
+      .nav button span,
+      .sidebottom {
+        display: none
+      }
+
+      .nav button {
+        text-align: center;
+        padding: 13px 5px;
+        font-size: 18px
+      }
+
+      .main {
+        margin-left: 65px;
+        padding: 17px 12px
+      }
+
+      .stats {
+        gap: 8px
+      }
+
+      .stat {
+        padding: 12px
+      }
+
+      .stat strong {
+        font-size: 21px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="login" id="loginScreen">
+    <form class="loginbox" id="loginForm">
+      <div class="logo">✧</div>
+      <h1>NEXUS Admin</h1>
+      <p>Painel administrativo da Universidade Anhembi Morumbi. Gerencie feedbacks, treine o assistente e mantenha a
+        base de conhecimento atualizada.</p>
+      <label for="password">Senha de acesso</label>
+      <input class="field" id="password" type="password" placeholder="Digite a senha" required>
+      <div class="error" id="loginError"></div>
+      <button class="btn full" type="submit">Entrar no painel</button>
+      <div class="hint">Acesso de demonstração: NEXUS2026. Em uma hospedagem estática, essa senha é apenas uma barreira
+        visual; autenticação real exige backend.</div>
+    </form>
+  </section>
+
+  <div class="app" id="adminApp">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brandicon">✧</div>
+        <div class="brandtext"><strong>NEXUS</strong><small>ADMINISTRAÇÃO</small></div>
+      </div>
+      <div class="navlabel">GERENCIAMENTO</div>
+      <nav class="nav">
+        <button class="active" data-page="dashboard"><span>⌂</span> Visão geral</button>
+        <button data-page="feedbacks"><span>☷</span> Feedbacks</button>
+        <button data-page="training"><span>✎</span> Treinamento</button>
+        <button data-page="rules"><span>▤</span> Base de regras</button>
+        <button data-page="backup"><span>⇧</span> Backup e dados</button>
+      </nav>
+      <div class="sidebottom">Universidade Anhembi Morumbi<br>NEXUS · Painel administrativo</div>
+    </aside>
+    <main class="main">
+      <div class="topbar">
+        <div class="crumb">NEXUS / <strong id="crumb">Visão geral</strong></div><button onclick="logout()">Sair do
+          painel</button>
+      </div>
+
+      <section class="page active" id="dashboard">
+        <h1>Visão geral</h1>
+        <p class="subtitle">Acompanhe a avaliação dos estudantes e a evolução da base de conhecimento do assistente
+          NEXUS.</p>
+        <div class="stats">
+          <div class="stat"><small>Feedbacks recebidos</small><strong id="totalFeedback">0</strong></div>
+          <div class="stat"><small>Avaliações positivas</small><strong class="green" id="positiveFeedback">0</strong>
+          </div>
+          <div class="stat"><small>Avaliações negativas</small><strong class="red" id="negativeFeedback">0</strong>
+          </div>
+          <div class="stat"><small>Regras personalizadas</small><strong id="totalRules">0</strong></div>
+        </div>
+        <div class="grid2">
+          <div class="panel">
+            <h3>Últimos feedbacks</h3>
+            <div id="latestFeedback"></div>
+          </div>
+          <div class="panel">
+            <h3>Como funciona o treinamento</h3>
+            <p style="font-size:12px;color:var(--muted);line-height:1.8">1. O estudante envia uma pergunta ao
+              assistente.<br>2. O assistente responde usando a base de regras.<br>3. O estudante avalia a resposta com
+              👍 ou 👎.<br>4. O feedback é registrado aqui.<br>5. Você cria ou ajusta uma regra com uma resposta
+              melhor.<br>6. O assistente passa a usar a regra atualizada nas próximas perguntas.</p><button class="btn"
+              onclick="showPage('feedbacks')">Analisar feedbacks</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="feedbacks">
+        <h1>Feedbacks dos estudantes</h1>
+        <p class="subtitle">Consulte as avaliações das respostas e transforme feedbacks negativos em melhorias para o
+          assistente.</p>
+        <div class="toolbar"><input class="search" id="feedbackSearch" placeholder="Buscar pergunta ou resposta..."
+            oninput="renderFeedbacks()"><button class="secondary" onclick="renderFeedbacks()">Atualizar lista</button>
+        </div>
+        <div id="feedbackList"></div>
+      </section>
+
+      <section class="page" id="training">
+        <h1>Treinamento do assistente</h1>
+        <p class="subtitle">Crie respostas corrigidas e associe palavras-chave para melhorar a interpretação das
+          perguntas.</p>
+        <div class="formsection">
+          <h3 id="formTitle">＋ Cadastrar nova regra</h3>
+          <input type="hidden" id="ruleId">
+          <label class="label" for="ruleName">Nome da regra / intenção</label><input class="field" id="ruleName"
+            placeholder="Ex.: Prazo para entrega de certificados">
+          <label class="label" for="ruleKeywords">Palavras-chave (separadas por vírgula)</label><input class="field"
+            id="ruleKeywords" placeholder="Ex.: prazo, entrega, certificado, data limite">
+          <label class="label" for="ruleWeight">Prioridade da regra (1 a 10)</label>
+          <input class="field" id="ruleWeight" type="number" min="1" max="10" value="5" placeholder="5">
+          <label class="label" for="ruleAnswer">Resposta que o assistente deverá fornecer</label><textarea
+            class="field textarea" id="ruleAnswer"
+            placeholder="Escreva uma resposta clara, completa e objetiva."></textarea>
+          <div class="formactions"><button class="btn" onclick="saveRule()">Salvar regra</button><button
+              class="secondary" onclick="clearRuleForm()">Limpar formulário</button></div>
+        </div>
+        <div class="formsection">
+          <h3>Testar uma pergunta</h3>
+          <label class="label" for="testQuestion">Pergunta de teste</label><input class="field" id="testQuestion"
+            placeholder="Digite uma pergunta para testar">
+          <div class="formactions"><button class="secondary" onclick="testRule()">Testar resposta</button></div>
+          <div id="testResult" class="hint"></div>
+        </div>
+      </section>
+
+      <section class="page" id="rules">
+        <h1>Base de regras</h1>
+        <p class="subtitle">Consulte e gerencie as regras personalizadas utilizadas pelo assistente virtual.</p>
+        <div class="toolbar"><input class="search" id="ruleSearch" placeholder="Buscar regra..."
+            oninput="renderRules()"><button class="btn" onclick="showPage('training')">＋ Nova regra</button></div>
+        <div id="rulesList"></div>
+      </section>
+
+      <section class="page" id="backup">
+        <h1>Backup e dados</h1>
+        <p class="subtitle">Exporte feedbacks e regras personalizadas para guardar ou transferir os dados para outro
+          navegador.</p>
+        <div class="panel">
+          <h3>Exportação e importação</h3>
+          <p style="font-size:12px;color:var(--muted);line-height:1.7">O backup inclui feedbacks e regras
+            personalizadas. Para compartilhar dados entre computadores, exporte o arquivo JSON e importe-o no outro
+            navegador.</p>
+          <div class="formactions"><button class="btn" onclick="exportBackup()">Exportar backup JSON</button><button
+              class="secondary" onclick="document.getElementById('importFile').click()">Importar backup
+              JSON</button><button class="secondary" onclick="exportCSV()">Exportar feedbacks CSV</button></div>
+          <input id="importFile" type="file" accept=".json,application/json" hidden>
+        </div>
+        <div class="panel" style="margin-top:15px">
+          <h3>Limpeza de feedbacks</h3>
+          <p style="font-size:12px;color:var(--muted)">Remove o histórico de avaliações deste navegador. As regras
+            personalizadas serão mantidas.</p><button class="secondary" onclick="clearFeedback()">Limpar
+            feedbacks</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+    const KEY_FEEDBACK = "nexus_aac_feedback_v1", KEY_RULES = "nexus_aac_custom_rules_v1";
+    const BASE_RULES = [
+      { id: "total", name: "Carga horária total", keywords: ["carga horaria", "horas totais", "quantas horas", "meta total"], answer: "A carga horária total cadastrada neste ambiente é de 200 horas de Atividades Acadêmicas Complementares. Consulte o regulamento do seu curso para confirmar os critérios aplicáveis.", weight: 4 },
+      { id: "pending", name: "Horas pendentes", keywords: ["faltam", "pendentes", "restam", "quanto falta"], answer: "Seu painel apresenta 140 horas concluídas de um total de 200 horas. Portanto, faltam 60 horas para completar a carga horária.", weight: 5 },
+      { id: "done", name: "Horas concluídas", keywords: ["horas concluidas", "ja completei", "meu progresso", "quanto completei"], answer: "Você possui 140 horas validadas de um total de 200 horas, o que representa 70% da carga horária.", weight: 4 },
+      { id: "activities", name: "Atividades aceitas", keywords: ["atividades aceitas", "quais atividades", "palestras", "eventos", "voluntariado", "cursos"], answer: "Exemplos de atividades complementares incluem cursos, palestras, eventos acadêmicos, projetos, pesquisa, extensão, monitoria e voluntariado. A validação depende dos critérios do seu curso.", weight: 3 },
+      { id: "certificate", name: "Certificados", keywords: ["certificado", "comprovante", "documento", "validar", "validacao"], answer: "O certificado deve identificar o estudante, a atividade, a instituição responsável, a data e a carga horária. Após o envio, o registro permanece em análise até a validação.", weight: 4 },
+      { id: "deadline", name: "Prazos", keywords: ["prazo", "data limite", "quando aprova", "demora"], answer: "Os prazos de envio e análise devem ser consultados nos comunicados e no calendário acadêmico do curso. Recomendo encaminhar os comprovantes com antecedência.", weight: 3 }
+    ];
+    function read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback } catch { return fallback } }
+    function write(key, data) { try { localStorage.setItem(key, JSON.stringify(data)); return true } catch { toast("Não foi possível salvar os dados."); return false } }
+    function feedbacks() { return read(KEY_FEEDBACK, []) }
+    function rules() { return read(KEY_RULES, []) }
+    function allRules() { return [...rules(), ...BASE_RULES] }
+    function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim() }
+    const STOP = new Set(["qual", "quais", "quanto", "quantos", "quantas", "como", "onde", "quando", "porque", "para", "com", "sem", "uma", "uns", "dos", "das", "que", "tem", "ter", "de", "do", "da", "no", "na", "em", "e", "ou", "meu", "minha", "sobre", "aac", "atividade", "atividades"]);
+    function normalize(s) { return norm(s) }
+    function getRules() { return allRules() }
+    function scoreRule(question, rule, ruleIndex = 0) {
+      const questionWords = normalize(question).split(" ").filter(Boolean);
+      const meaningfulQuestionWords = questionWords.filter(word => word.length > 2 && !STOP.has(word));
+      let rawScore = 0, specificity = 0;
+      const matched = [];
+      (rule.keywords || []).forEach(keyword => {
+        const keyWords = normalize(keyword).split(" ").filter(Boolean);
+        if (!keyWords.length) return;
+        let exactPhrase = false;
+        for (let i = 0; i <= questionWords.length - keyWords.length; i++) {
+          if (keyWords.every((word, position) => questionWords[i + position] === word)) {
+            exactPhrase = true;
+            break;
+          }
+        }
+        if (exactPhrase) {
+          const points = 14 + keyWords.length * 5;
+          rawScore += points;
+          specificity = Math.max(specificity, points + keyWords.length * 10);
+          matched.push(keyword);
+          return;
+        }
+        const meaningful = keyWords.filter(word => word.length > 2 && !STOP.has(word));
+        const hits = [...new Set(meaningful.filter(word => meaningfulQuestionWords.includes(word)))];
+        if (hits.length) {
+          const coverage = hits.length / Math.max(meaningful.length, 1);
+          rawScore += hits.length * 3;
+          if (coverage >= 0.75) rawScore += 4;
+          specificity = Math.max(specificity, hits.length * 2 + coverage * 5);
+          matched.push(...hits);
+        }
+      });
+      const weight = Math.min(10, Math.max(1, Number(rule.weight) || 1));
+      return { rawScore, score: rawScore * weight, specificity, matched: [...new Set(matched)], ruleIndex };
+    }
+    function selectBestRule(question) {
+      const matches = getRules().map((rule, index) => ({ rule, ...scoreRule(question, rule, index) }))
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score || b.specificity - a.specificity || b.rawScore - a.rawScore || a.ruleIndex - b.ruleIndex);
+      return matches[0] || null;
+    }
+    function findRule(question) { return selectBestRule(question) }
+    function toast(s) { const t = document.createElement("div"); t.className = "toast"; t.textContent = s; document.body.append(t); setTimeout(() => t.remove(), 2800) }
+    function showPage(id) { document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id)); document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.page === id)); document.getElementById("crumb").textContent = ({ dashboard: "Visão geral", feedbacks: "Feedbacks", training: "Treinamento", rules: "Base de regras", backup: "Backup e dados" })[id]; if (id === "feedbacks") renderFeedbacks(); if (id === "rules") renderRules(); if (id === "dashboard") renderDashboard() }
+    document.querySelectorAll(".nav button").forEach(b => b.addEventListener("click", () => showPage(b.dataset.page)));
+    function renderDashboard() { const a = feedbacks(), pos = a.filter(x => x.rating === "positivo").length, neg = a.filter(x => x.rating === "negativo").length; document.getElementById("totalFeedback").textContent = a.length; document.getElementById("positiveFeedback").textContent = pos; document.getElementById("negativeFeedback").textContent = neg; document.getElementById("totalRules").textContent = rules().length; document.getElementById("latestFeedback").innerHTML = a.length ? a.slice().sort((x, y) => new Date(y.date || 0) - new Date(x.date || 0)).slice(0, 5).map(x => `<div class="activityitem"><span class="pill ${x.rating === "negativo" ? "negative" : ""}">${x.rating === "negativo" ? "👎 Negativo" : "👍 Positivo"}</span><div style="font-size:11px;margin-left:9px">${escapeHTML(x.question)}</div></div>`).join("") : '<div class="empty">Nenhum feedback recebido ainda.</div>' }
+    function escapeHTML(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])) }
+    function renderFeedbacks() { const q = (document.getElementById("feedbackSearch").value || "").toLowerCase(), list = feedbacks().filter(x => String(x.question || "").concat(" ", String(x.answer || "")).toLowerCase().includes(q)).sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0)), root = document.getElementById("feedbackList"); root.innerHTML = ""; if (!list.length) { root.innerHTML = '<div class="empty">Nenhum feedback encontrado.</div>'; return } list.forEach(item => { const card = document.createElement("article"); card.className = "feedbackcard"; const badge = document.createElement("span"); badge.className = "pill " + (item.rating === "negativo" ? "negative" : ""); badge.textContent = item.rating === "negativo" ? "👎 Avaliação negativa" : "👍 Avaliação positiva"; const question = document.createElement("p"); question.innerHTML = "<strong>Pergunta:</strong> " + escapeHTML(item.question); const answer = document.createElement("p"); answer.innerHTML = "<strong>Resposta apresentada:</strong> " + escapeHTML(item.answer); const meta = document.createElement("div"); meta.className = "meta"; meta.textContent = new Date(item.date).toLocaleString("pt-BR") + " · Regra utilizada: " + (item.ruleName || "Resposta padrão"); card.append(badge, question, answer, meta); if (item.rating === "negativo") { const actions = document.createElement("div"); actions.className = "actions"; const train = document.createElement("button"); train.className = "smallbtn primary"; train.textContent = "Treinar resposta para esta pergunta"; train.onclick = () => startTraining(item); actions.append(train); card.append(actions) } root.append(card) }) }
+    function startTraining(item) { showPage("training"); document.getElementById("ruleId").value = ""; document.getElementById("ruleName").value = "Correção: " + item.question.slice(0, 65); document.getElementById("ruleKeywords").value = [...new Set(norm(item.question).split(" ").filter(w => w.length > 3 && !STOP.has(w)))].join(", "); document.getElementById("ruleWeight").value = "7"; document.getElementById("ruleAnswer").value = ""; document.getElementById("formTitle").textContent = "Criar resposta corrigida"; document.getElementById("ruleAnswer").focus(); toast("Pergunta e palavras-chave carregadas. Escreva a resposta corrigida.") }
+    function saveRule() {
+      const id = document.getElementById("ruleId").value;
+      const name = document.getElementById("ruleName").value.trim();
+      const keywords = [...new Set(document.getElementById("ruleKeywords").value.split(",").map(x => x.trim()).filter(Boolean))];
+      const answer = document.getElementById("ruleAnswer").value.trim();
+      const weight = Number(document.getElementById("ruleWeight").value);
+      if (!name || !keywords.length || !answer) { toast("Preencha nome, palavras-chave e resposta."); return; }
+      if (!Number.isInteger(weight) || weight < 1 || weight > 10) { toast("A prioridade deve ser um número inteiro entre 1 e 10."); return; }
+      const data = rules();
+      const row = { id: id || "custom-" + Date.now(), name, keywords, answer, weight, custom: true, updatedAt: new Date().toISOString() };
+      const i = data.findIndex(x => x.id === id);
+      if (i >= 0) data[i] = row; else data.unshift(row);
+      if (write(KEY_RULES, data)) { clearRuleForm(); renderDashboard(); renderRules(); toast("Regra salva! O assistente utilizará essa resposta nas próximas perguntas."); }
+    }
+    function clearRuleForm() {
+      ["ruleId", "ruleName", "ruleKeywords", "ruleAnswer"].forEach(id => document.getElementById(id).value = "");
+      document.getElementById("ruleWeight").value = "5";
+      document.getElementById("formTitle").textContent = "＋ Cadastrar nova regra";
+    }
+    function renderRules() { const q = (document.getElementById("ruleSearch").value || "").toLowerCase(), root = document.getElementById("rulesList"); root.innerHTML = ""; const list = rules().filter(r => (r.name + " " + r.keywords.join(" ")).toLowerCase().includes(q)); if (!list.length) { root.innerHTML = '<div class="empty">Nenhuma regra personalizada cadastrada.</div>'; return } list.forEach(r => { const card = document.createElement("div"); card.className = "rulecard"; const title = document.createElement("strong"); title.textContent = r.name; const words = document.createElement("small"); words.textContent = "Palavras-chave: " + r.keywords.join(", ") + " · Prioridade: " + (r.weight || 5) + "/10"; const ans = document.createElement("small"); ans.textContent = "Resposta: " + r.answer; const actions = document.createElement("div"); actions.className = "actions"; const edit = document.createElement("button"); edit.className = "smallbtn"; edit.textContent = "Editar"; edit.onclick = () => { showPage("training"); document.getElementById("ruleId").value = r.id; document.getElementById("ruleName").value = r.name; document.getElementById("ruleKeywords").value = r.keywords.join(", "); document.getElementById("ruleAnswer").value = r.answer; document.getElementById("ruleWeight").value = r.weight || 5; document.getElementById("formTitle").textContent = "Editar regra" }; const del = document.createElement("button"); del.className = "smallbtn danger"; del.textContent = "Excluir"; del.onclick = () => { if (confirm("Excluir esta regra?")) { write(KEY_RULES, rules().filter(x => x.id !== r.id)); renderRules(); renderDashboard(); toast("Regra excluída.") } }; actions.append(edit, del); card.append(title, words, ans, actions); root.append(card) }) }
+    function testRule() {
+      const q = document.getElementById("testQuestion").value.trim(), out = document.getElementById("testResult");
+      if (!q) { out.textContent = "Digite uma pergunta."; return; }
+      const r = findRule(q);
+      out.textContent = r
+        ? "Regra selecionada: " + r.rule.name + " | Pontuação final: " + r.score.toFixed(1) + " | Prioridade: " + (r.rule.weight || 1) + "/10 | Especificidade: " + r.specificity.toFixed(1) + " | Termos reconhecidos: " + (r.matched.join(", ") || "nenhum") + " | Resposta: " + r.rule.answer
+        : "Nenhuma regra correspondeu. O assistente usará a resposta padrão.";
+    }
+    function download(name, data, type) { const blob = new Blob([data], { type }), url = URL.createObjectURL(blob), a = document.createElement("a"); a.href = url; a.download = name; a.click(); URL.revokeObjectURL(url) }
+    function exportBackup() { download("nexus_backup.json", JSON.stringify({ application: "NEXUS", version: 1, exportedAt: new Date().toISOString(), feedback: feedbacks(), customRules: rules() }, null, 2), "application/json"); toast("Backup exportado.") }
+    function exportCSV() { const rows = feedbacks(); if (!rows.length) { toast("Não há feedbacks para exportar."); return } const quote = x => '"' + String(x ?? "").replace(/"/g, '""') + '"', csv = [["Pergunta", "Resposta", "Avaliação", "Regra", "Pontuação", "Data"], ...rows.map(x => [x.question, x.answer, x.rating, x.ruleName, x.score, x.date])].map(r => r.map(quote).join(";")).join("\r\n"); download("nexus_feedbacks.csv", "\uFEFF" + csv, "text/csv;charset=utf-8") }
+    document.getElementById("importFile").addEventListener("change", async e => { const f = e.target.files[0]; if (!f) return; try { const d = JSON.parse(await f.text()); if (d.application !== "NEXUS" || !Array.isArray(d.feedback) || !Array.isArray(d.customRules)) throw Error(); if (!confirm("Substituir os feedbacks e regras atuais por este backup?")) return; write(KEY_FEEDBACK, d.feedback); write(KEY_RULES, d.customRules); renderDashboard(); renderFeedbacks(); renderRules(); toast("Backup importado.") } catch { toast("Arquivo de backup inválido.") } e.target.value = "" });
+    function clearFeedback() { if (!confirm("Apagar todos os feedbacks deste navegador? As regras serão mantidas.")) return; write(KEY_FEEDBACK, []); renderDashboard(); renderFeedbacks(); toast("Feedbacks apagados.") }
+    function logout() { document.getElementById("adminApp").style.display = "none"; document.getElementById("loginScreen").style.display = "grid"; document.getElementById("password").value = "" }
+    document.getElementById("loginForm").addEventListener("submit", e => { e.preventDefault(); if (document.getElementById("password").value === "NEXUS2026") { document.getElementById("loginScreen").style.display = "none"; document.getElementById("adminApp").style.display = "flex"; renderDashboard() } else document.getElementById("loginError").textContent = "Senha incorreta. Tente novamente." });
+    renderDashboard();
+  </script>
+</body>
+
+</html>
