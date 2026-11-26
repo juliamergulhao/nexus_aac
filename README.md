@@ -17,7 +17,7 @@
   &nbsp;·&nbsp;
   <a href="https://juliamergulhao.github.io/nexus_aac/NEXUS_admin.html"><strong>⚙ Acessar painel administrativo</strong></a>
   &nbsp;·&nbsp;
-  <a href="https://juliamergulhao.github.io/nexus_aac/Relat%C3%B3rio_NEXUS.docx"><strong>▤ Baixar relatório</strong></a>
+  <a href="https://github.com/juliamergulhao/nexus_aac/raw/refs/heads/main/Relat%C3%B3rio_NEXUS.docx"><strong>▤ Baixar relatório</strong></a>
   &nbsp;·&nbsp;
   <a href="https://juliamergulhao.github.io/nexus_aac/Apresenta%C3%A7%C3%A3o_NEXUS.html"><strong>▣ Abrir apresentação</strong></a>
 </p>
@@ -163,7 +163,7 @@ Em seguida, abra os arquivos HTML diretamente no navegador.
 
 - [Abrir o portal do estudante](NEXUS_index.html)
 - [Abrir o painel administrativo](NEXUS_admin.html)
-- [Baixar o relatório acadêmico](https://juliamergulhao.github.io/nexus_aac/Relat%C3%B3rio_NEXUS.docx)
+- [Baixar o relatório acadêmico](https://github.com/juliamergulhao/nexus_aac/raw/refs/heads/main/Relat%C3%B3rio_NEXUS.docx)
 - [Abrir a apresentação interativa](https://juliamergulhao.github.io/nexus_aac/Apresenta%C3%A7%C3%A3o_NEXUS.html)
 
 ## 👩‍💻 Autoria
